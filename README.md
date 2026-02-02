@@ -65,7 +65,7 @@ Automatically returns to normal operation after timeout (15 mins)
 ### Home Assistant integration ###
 Uses input_boolean helpers for:
 - OTA mode: input_boolean.co2_sensor1_ota_mode
-- Calibration request: input_boolean.co2_sensor1_manualni_kalibrace
+- Calibration request: input_boolean.co2_sensor1_manual_cal
   (for calibration is recomended at least 15 mins at fresh air)
 Device connects to HA only once a 15 mins. It means if you change helper state, the sensor will update its state at next period. It may took up to 15 minutes. 
 So if you want to do the OTA FW upgrade, you need to activate the helper and wait for the next period. You will see the values of CO2 and the others are updating in HA. Now you have 15 mins to update FW from ESPHome. After the timeout the sensor will reset the helper and return to the normal mode and go to sleep.
