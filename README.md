@@ -82,4 +82,4 @@ ESPHome device must be trusted to call HA services. If it is not, it will not be
   - Indoor air quality monitoring
   - Bedrooms, living rooms, offices
 
-**** 3D printer enclosure model link will be here soon. ***
+**** 3D printed enclosure model link will be here soon. ***
