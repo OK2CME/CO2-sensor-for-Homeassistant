@@ -52,6 +52,8 @@ Asynchronous control from Home Assistant.
 * Normal mode
 deep sleep 5 min
 Wake up → measure → update display → send data (every 3rd wake up) → deep sleep
+  - When CO2 is over the 1000 ppm you will see the "!" triangle sign.
+  - When CO2 is over 1500 ppm you will see the inverted "!" triagnle sign. 
 
 * Low battery mode
 deep sleep 15 min
