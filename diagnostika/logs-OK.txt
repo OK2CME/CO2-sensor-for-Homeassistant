@@ -1,0 +1,188 @@
+[22:39:45]ets Jul 29 2019 12:21:46
+[22:39:45]
+[22:39:45]rst:0x1 (POWERON_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+[22:39:45]configsip: 0, SPIWP:0xee
+[22:39:45]clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+[22:39:45]mode:DIO, clock div:2
+[22:39:45]load:0x3fff0030,len:6276
+[22:39:45]load:0x40078000,len:15736
+[22:39:45]load:0x40080400,len:4
+[22:39:45]load:0x40080404,len:3860
+[22:39:45]entry 0x40080634
+[22:39:45]I (29) boot: ESP-IDF 5.4.2 2nd stage bootloader
+[22:39:45]I (29) boot: compile time Nov  9 2025 23:47:48
+[22:39:45]I (30) boot: Multicore bootloader
+[22:39:45]I (31) boot: chip revision: v3.1
+[22:39:45]I (33) boot.esp32: SPI Speed      : 40MHz
+[22:39:45]I (37) boot.esp32: SPI Mode       : DIO
+[22:39:45]I (41) boot.esp32: SPI Flash Size : 4MB
+[22:39:45]I (44) boot: Enabling RNG early entropy source...
+[22:39:45]I (49) boot: Partition Table:
+[22:39:45]I (51) boot: ## Label            Usage          Type ST Offset   Length
+[22:39:45]I (58) boot:  0 nvs              WiFi data        01 02 00009000 00005000
+[22:39:45]I (64) boot:  1 otadata          OTA data         01 00 0000e000 00002000
+[22:39:45]I (71) boot:  2 app0             OTA app          00 10 00010000 001c0000
+[22:39:45]I (77) boot:  3 app1             OTA app          00 11 001d0000 001c0000
+[22:39:45]I (84) boot:  4 eeprom           Unknown data     01 99 00390000 00001000
+[22:39:45]I (90) boot:  5 spiffs           Unknown data     01 82 00391000 0000f000
+[22:39:45]I (97) boot: End of partition table
+[22:39:45]I (100) esp_image: segment 0: paddr=001d0020 vaddr=3f400020 size=2f334h (193332) map
+[22:39:45]I (174) esp_image: segment 1: paddr=001ff35c vaddr=3ff80060 size=0001ch (    28) load
+[22:39:45]I (174) esp_image: segment 2: paddr=001ff380 vaddr=3ffb0000 size=00c98h (  3224) load
+[22:39:45]I (179) esp_image: segment 3: paddr=00200020 vaddr=400d0020 size=b77e4h (751588) map
+[22:39:45]I (442) esp_image: segment 4: paddr=002b780c vaddr=3ffb0c98 size=03308h ( 13064) load
+[22:39:45]I (447) esp_image: segment 5: paddr=002bab1c vaddr=40080000 size=17e40h ( 97856) load
+[22:39:45]I (485) esp_image: segment 6: paddr=002d2964 vaddr=400c0000 size=00060h (    96) load
+[22:39:45]I (497) boot: Loaded app from partition at offset 0x1d0000
+[22:39:45]I (497) boot: Disabling RNG early entropy source...
+[22:39:45][I][logger:121]: Log initialized
+[22:39:45][C][safe_mode:084]: Unsuccessful boot attempts: 0
+[22:39:45][D][esp32.preferences:149]: Writing 1 items: 0 cached, 1 written, 0 failed
+[22:39:45][I][app:073]: Running through setup()
+[22:39:45][I][i2c.arduino:170]: Performing bus recovery
+[22:39:45][C][component:173]: Setup i2c took 23ms
+[22:39:45][C][component:173]: Setup spi took 1ms
+[22:39:45][C][component:173]: Setup preferences took 0ms
+[22:39:45][C][component:173]: Setup gpio.output took 0ms
+[22:39:45][C][component:173]: Setup globals took 1ms
+[22:39:45][C][component:173]: Setup scd4x.sensor took 0ms
+[22:39:45][C][component:173]: Setup adc.sensor took 1ms
+[22:39:45][C][component:173]: Setup interval took 0ms
+[22:39:45][C][component:173]: Setup esphome.coroutine took 0ms
+[22:39:45][D][spi_device:393]: mode 0, data_rate 2000kHz
+[22:39:45][C][component:173]: Setup display took 158ms
+[22:39:45][C][component:173]: Setup wifi took 12ms
+[22:39:45][C][component:173]: Setup esphome.ota took 1ms
+[22:39:45][C][component:173]: Setup safe_mode took 0ms
+[22:39:45][W][component:297]: api set Warning flag: unspecified
+[22:39:45][C][component:173]: Setup api took 1ms
+[22:39:45][C][component:173]: Setup wifi_signal.sensor took 0ms
+[22:39:45][C][component:173]: Setup mdns took 1ms
+[22:39:45][D][main:034]: Skipping WiFi this cycle
+[22:39:45][I][main:038]: Wakecounter = 0
+[22:39:45][C][component:173]: Setup esphome.coroutine took 8ms
+[22:39:45][I][deep_sleep:019]: Scheduling in 20000 ms
+[22:39:46][C][component:173]: Setup deep_sleep took 0ms
+[22:39:46][I][app:120]: setup() finished successfully!
+[22:39:46][I][app:185]: ESPHome version 2025.10.4 compiled on Nov 11 2025, 22:13:43
+[22:39:46][C][logger:261]: Logger:
+[22:39:46][C][logger:261]:  Max Level: DEBUG
+[22:39:46][C][logger:261]:  Initial Level: DEBUG
+[22:39:46][C][logger:267]:   Log Baud Rate: 115200
+[22:39:46][C][logger:267]:  Hardware UART: UART0
+[22:39:46][C][logger:274]:   Task Log Buffer Size: 768
+[22:39:46][I][waveshare_2.13v3:148]: Performing full e-paper update.
+[22:39:46][C][i2c.arduino:072]: I2C Bus:
+[22:39:46][C][i2c.arduino:073]:   SDA Pin: GPIO0
+[22:39:46][C][i2c.arduino:073]:  SCL Pin: GPIO4
+[22:39:46][C][i2c.arduino:073]:  Frequency: 50000 Hz
+[22:39:46][C][i2c.arduino:089]:   Recovery: bus successfully recovered
+[22:39:46][I][i2c.arduino:099]: Results from bus scan:
+[22:39:46][I][i2c.arduino:105]: Found device at address 0x62
+[22:39:46][C][spi:067]: SPI bus:
+[22:39:46][C][spi:068]:   CLK Pin: GPIO18
+[22:39:46][C][spi:069]:   SDI Pin: 
+[22:39:46][C][spi:070]:   SDO Pin: GPIO23
+[22:39:46][C][spi:075]:   Using HW SPI: SPI
+[22:39:46][C][gpio.output:010]: Binary Output:
+[22:39:46][C][gpio.output:011]:   Pin: GPIO22
+[22:39:46][C][scd4x:112]: SCD4X:
+[22:39:46][C][scd4x:113]:   Address: 0x62
+[22:39:46][C][scd4x:130]:   Automatic self calibration: OFF
+[22:39:46][C][scd4x:130]:  Measurement mode: Single shot
+[22:39:46][C][scd4x:130]:  Temperature offset: 0.00 °C
+[22:39:46][C][scd4x:145]:   Ambient pressure compensation disabled
+[22:39:46][C][scd4x:145]:  Altitude compensation: 567m
+[22:39:46][C][scd4x:362]:   Update Interval: 7.0s
+[22:39:46][C][scd4x:015]:   CO2 'CO2'
+[22:39:46][C][scd4x:015]:    State Class: 'measurement'
+[22:39:46][C][scd4x:015]:    Unit of Measurement: 'ppm'
+[22:39:46][C][scd4x:015]:    Accuracy Decimals: 0
+[22:39:46][C][scd4x:025]:     Device Class: 'carbon_dioxide'
+[22:39:46][C][scd4x:029]:     Icon: 'mdi:molecule-co2'
+[22:39:46][C][scd4x:015]:   Temperature 'Teplota'
+[22:39:46][C][scd4x:015]:    State Class: 'measurement'
+[22:39:46][C][scd4x:015]:    Unit of Measurement: '°C'
+[22:39:46][C][scd4x:015]:    Accuracy Decimals: 1
+[22:39:46][C][scd4x:025]:     Device Class: 'temperature'
+[22:39:46][C][scd4x:029]:     Icon: 'mdi:thermometer'
+[22:39:46][C][scd4x:015]:   Humidity 'Vlhkost'
+[22:39:46][C][scd4x:015]:    State Class: 'measurement'
+[22:39:46][C][scd4x:015]:    Unit of Measurement: '%'
+[22:39:46][C][scd4x:015]:    Accuracy Decimals: 0
+[22:39:46][C][scd4x:025]:     Device Class: 'humidity'
+[22:39:46][C][scd4x:029]:     Icon: 'mdi:water-percent'
+[22:39:46][C][adc.esp32:015]: ADC Sensor 'VBatt'
+[22:39:46][C][adc.esp32:015]:  State Class: 'measurement'
+[22:39:46][C][adc.esp32:015]:  Unit of Measurement: 'V'
+[22:39:46][C][adc.esp32:015]:  Accuracy Decimals: 2
+[22:39:46][C][adc.esp32:025]:   Device Class: 'voltage'
+[22:39:46][C][adc.esp32:122]:   Pin: GPIO35
+[22:39:46][C][adc.esp32:123]:   Channel:       7
+[22:39:46][C][adc.esp32:123]:  Unit:          ADC1
+[22:39:46][C][adc.esp32:123]:  Attenuation:   Auto
+[22:39:46][C][adc.esp32:123]:  Samples:       1
+[22:39:46][C][adc.esp32:123]:  Sampling mode: average
+[22:39:46][C][adc.esp32:133]:   Setup Status:
+[22:39:46][C][adc.esp32:133]:    Handle Init:  OK
+[22:39:46][C][adc.esp32:133]:    Config:       OK
+[22:39:46][C][adc.esp32:133]:    Calibration:  OK
+[22:39:46][C][adc.esp32:133]:    Overall Init: OK
+[22:39:46][C][adc.esp32:362]:   Update Interval: 3.0s
+[22:39:46][C][waveshare_2.13v3:178]: Waveshare E-Paper
+[22:39:46][C][waveshare_2.13v3:178]:  Rotations: 270 °
+[22:39:46][C][waveshare_2.13v3:178]:  Dimensions: 250px x 122px
+[22:39:46][C][waveshare_2.13v3:179]:   Model: 2.13inV3
+[22:39:46][C][waveshare_2.13v3:180]:   CS Pin: GPIO5
+[22:39:46][C][waveshare_2.13v3:181]:   Reset Pin: GPIO16
+[22:39:46][C][waveshare_2.13v3:182]:   DC Pin: GPIO17
+[22:39:46][C][waveshare_2.13v3:183]:   Busy Pin: GPIO34
+[22:39:46][C][waveshare_2.13v3:362]:   Update Interval: 9.0s
+[22:39:46][C][wifi:679]: WiFi:
+[22:39:46][W][wifi_esp32:1011]: esp_wifi_sta_get_ap_info failed: ESP_ERR_WIFI_CONN
+[22:39:46][C][wifi:458]:   Local MAC: 2C:BC:BB:92:43:9C
+[22:39:46][C][wifi:460]:   Disabled
+[22:39:46][D][esp32.preferences:149]: Writing 1 items: 0 cached, 1 written, 0 failed
+[22:39:46][C][esphome.ota:093]: Over-The-Air updates:
+[22:39:46][C][esphome.ota:093]:  Address: 192.168.10.19:3232
+[22:39:46][C][esphome.ota:093]:  Version: 2
+[22:39:46][C][esphome.ota:100]:   Password configured
+[22:39:46][C][safe_mode:018]: Safe Mode:
+[22:39:46][C][safe_mode:018]:  Successful after: 60s
+[22:39:46][C][safe_mode:018]:  Invoke after: 10 attempts
+[22:39:46][C][safe_mode:018]:  Duration: 300s
+[22:39:46][C][api:222]: Server:
+[22:39:46][C][api:222]:  Address: 192.168.10.19:6053
+[22:39:46][C][api:222]:  Listen backlog: 4
+[22:39:46][C][api:222]:  Max connections: 8
+[22:39:46][C][api:229]:   Noise encryption: YES
+[22:39:46][C][wifi_signal.sensor:015]: WiFi Signal 'WiFi Signal'
+[22:39:46][C][wifi_signal.sensor:015]:  State Class: 'measurement'
+[22:39:46][C][wifi_signal.sensor:015]:  Unit of Measurement: 'dBm'
+[22:39:46][C][wifi_signal.sensor:015]:  Accuracy Decimals: 0
+[22:39:46][C][wifi_signal.sensor:025]:   Device Class: 'signal_strength'
+[22:39:46][C][mdns:179]: mDNS:
+[22:39:46][C][mdns:179]:  Hostname: co2-obyvak
+[22:39:46][C][deep_sleep:027]: Deep sleep:
+[22:39:46][C][deep_sleep:030]:   Sleep Duration: 300000 ms
+[22:39:46][C][deep_sleep:033]:   Run Duration: 20000 ms
+[22:39:47][D][scd4x:048]: Serial number 169.129.187
+[22:39:47][W][wifi_esp32:1032]: esp_wifi_sta_get_ap_info failed: ESP_ERR_WIFI_CONN
+[22:39:47][D][sensor:131]: 'WiFi Signal': Sending state 0.00000 dBm with 0 decimals of accuracy
+[22:39:52][D][sensor:131]: 'VBatt': Sending state 3.92833 V with 2 decimals of accuracy
+[22:39:52][W][wifi_esp32:1032]: esp_wifi_sta_get_ap_info failed: ESP_ERR_WIFI_CONN
+[22:39:52][D][sensor:131]: 'WiFi Signal': Sending state 0.00000 dBm with 0 decimals of accuracy
+[22:39:57][W][wifi_esp32:1032]: esp_wifi_sta_get_ap_info failed: ESP_ERR_WIFI_CONN
+[22:39:57][D][sensor:131]: 'WiFi Signal': Sending state 0.00000 dBm with 0 decimals of accuracy
+[22:39:57][D][sensor:131]: 'CO2': Sending state 1822.00000 ppm with 0 decimals of accuracy
+[22:39:58][D][sensor:131]: 'Teplota': Sending state 24.79065 °C with 1 decimals of accuracy
+[22:39:58][D][sensor:131]: 'Vlhkost': Sending state 44.03076 % with 0 decimals of accuracy
+[22:40:01][D][sensor:131]: 'VBatt': Sending state 3.93031 V with 2 decimals of accuracy
+[22:40:02][W][wifi_esp32:1032]: esp_wifi_sta_get_ap_info failed: ESP_ERR_WIFI_CONN
+[22:40:02][D][sensor:131]: 'WiFi Signal': Sending state 0.00000 dBm with 0 decimals of accuracy
+[22:40:04][D][sensor:131]: 'CO2': Sending state 1905.00000 ppm with 0 decimals of accuracy
+[22:40:05][D][sensor:131]: 'Teplota': Sending state 24.99893 °C with 1 decimals of accuracy
+[22:40:05][D][sensor:131]: 'Vlhkost': Sending state 43.73627 % with 0 decimals of accuracy
+[22:40:05][I][deep_sleep:061]: Beginning sleep
+[22:40:05][I][deep_sleep:063]: Sleeping for 300000000us
+[22:40:05][D][esp32.preferences:149]: Writing 1 items: 0 cached, 1 written, 0 failed

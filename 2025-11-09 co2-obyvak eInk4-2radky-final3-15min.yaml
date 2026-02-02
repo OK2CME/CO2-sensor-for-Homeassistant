@@ -1,0 +1,296 @@
+esphome:
+  name: co2-obyvak
+  friendly_name: CO2-obyvak
+  platformio_options:
+    board_build.f_cpu: 80000000L # Snížení frekvence CPU
+    
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Povolení Home Assistant API
+api:
+  encryption:
+    key: "iEOVg7likxOT0Cv2NYZqPuI4SWxtvkNaqg6wKgxEJ3c="
+
+ota:
+  - platform: esphome
+    password: "4210c560b941485b08fda92d9df21235"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  power_save_mode: light
+  fast_connect: true
+  reboot_timeout: 0s
+  enable_on_boot: true
+
+
+logger:
+  #level: VERY_VERBOSE
+
+i2c:
+  sda: 0
+  scl: 4
+  scan: true
+
+spi:
+  clk_pin: 18
+  mosi_pin: 23
+
+sensor:
+  - platform: scd4x
+    id: scd41
+    co2:
+      name: "CO2"
+      id: "co2"
+      accuracy_decimals: 0
+    temperature:
+      name: "Teplota"
+      id: "temperature"
+      accuracy_decimals: 1
+    humidity:
+      name: "Vlhkost"
+      id: "humidity"
+      accuracy_decimals: 0
+    altitude_compensation: 567m
+    temperature_offset: 0.0
+    automatic_self_calibration: false
+    measurement_mode: single_shot
+    address: 0x62
+    update_interval: 7s
+  - platform: adc
+    pin: 35
+    attenuation: auto
+    filters:
+      - multiply: 1.985
+      - median:
+          window_size: 3
+          send_every: 3
+          send_first_at: 3
+    name: "VBatt"
+    id: battery_voltage
+    update_interval: 5s
+  - platform: wifi_signal
+    id: wifi_sig
+    name: "WiFi Signal"
+    update_interval: 5s
+
+button:
+  - platform: template
+    name: "CO2 manual calibration (only in fresh air for at least 20min)"
+    entity_category: "config"
+    on_press:
+      then:
+      - scd4x.perform_forced_calibration:
+          value: 419
+
+output:
+  - platform: gpio
+    pin:
+      number: 22
+      mode: output
+      inverted: true
+    id: LED
+
+# Řízení měření a Wi-Fi podle napětí baterie
+interval:
+  - interval: 5s
+    then:
+      - lambda: |-
+          static bool wifi_enabled = true;
+          float voltage = id(battery_voltage).state;
+
+          // Deaktivace při nízkém napětí
+          if (voltage < 3.2) {
+            if (wifi_enabled) {
+              ESP_LOGI("main", "Battery voltage low, disabling Wi-Fi.");
+              WiFi.mode(WIFI_OFF);
+              id(deep_sleep_10min).set_run_duration(1000); // Zkrácení času běhu na 1 s
+              id(deep_sleep_10min).set_sleep_duration(15 * 60 * 1000); // 15 min spánek
+            }
+          } 
+          // Aktivace při dostatečném napětí
+          else if (voltage > 3.4) {
+            if (!wifi_enabled) {
+              ESP_LOGI("main", "Battery voltage sufficient, enabling Wi-Fi.");
+              WiFi.mode(WIFI_STA);
+              id(deep_sleep_10min).set_run_duration(10000); // Obnovení plné doby běhu
+            }
+          }
+
+font:
+  - file: "fonts/Play-Bold.ttf"
+    id: font_large
+    size: 42
+  - file: "fonts/Play-Bold.ttf"
+    id: font_medium2
+    size: 26
+  - file: "fonts/Play-Bold.ttf"
+    id: font_medium
+    size: 22
+  - file: "fonts/Play-Bold.ttf"
+    id: font_small
+    size: 14
+  # Include Material Design Icons font
+  # Thanks to https://community.home-assistant.io/t/display-materialdesign-icons-on-esphome-attached-to-screen/199790/16
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: font_mdi_large
+    size: 42
+    glyphs: &mdi-weather-glyphs
+      - "\U000F050F" # mdi-thermometer
+      - "\U000F0E0A" # mdi-water-outline
+      - "\U000F07E4" # mdi-co2-molecule
+      - "\U000F092E" # mdi-wifi-strength-off-outline
+      - "\U000F092F" # mdi-wifi-strength-outline
+      - "\U000F091F" # mdi-wifi-strength-1
+      - "\U000F0922" # mdi-wifi-strength-2
+      - "\U000F0925" # mdi-wifi-strength-3
+      - "\U000F0928" # mdi-wifi-strength-4
+      - "\U000F007C" # mdi-battery-low
+      - "\U000F0080" # mdi-battery-medium
+      - "\U000F0079" # mdi-battery-high
+      - "\U000F10CD" # mdi-battery-alert-variant-outline
+      - "\U000F0026" # mdi-alert
+      - "\U000F002A" # mdi-alert-outline
+
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: font_mdi_medium
+    size: 26
+    glyphs: *mdi-weather-glyphs
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: font_mdi_small
+    size: 14
+    glyphs: *mdi-weather-glyphs
+
+image:
+  # Volitelně můžeš nahradit ikonami BMP, pokud nemáš Font Awesome
+  # - file: "icons/thermometer.bmp"
+  #   id: icon_temp
+  #   type: BINARY
+  # - file: "icons/drop.bmp"
+  #   id: icon_hum
+  #   type: BINARY
+
+display:
+  - platform: waveshare_epaper
+    cs_pin: 5
+    dc_pin: 17
+    busy_pin: 34   # přesunuté sem
+    reset_pin: 16
+    model: 2.13inv3
+    reset_duration: 2ms
+    update_interval: 8s
+    rotation: 270
+    full_update_every: 30
+    lambda: |-
+      // Rozlišení displeje: 250x122
+      const int W = 250;
+      const int H = 122;
+
+      const auto WHITE   = Color(0,   0,   0,   0);
+      const auto RED     = Color(255, 0,   0,   0);
+      const auto BLACK   = Color(255, 255, 255, 0);
+
+      int co2_value = id(co2).has_state() ? id(co2).state : 0;
+      float temp = id(temperature).has_state() ? id(temperature).state : NAN;
+      float hum = id(humidity).has_state() ? id(humidity).state : NAN;
+      float batt = id(battery_voltage).has_state() ? id(battery_voltage).state : NAN;
+      batt = id(battery_voltage).state;
+      float wifi = id(wifi_sig).has_state() ? id(wifi_sig).state : NAN;
+
+      // Pozadí displeje
+      it.fill(WHITE);
+
+      // --- CO2 hlavní hodnota ---
+      int co2_x = 5;
+      int co2_y = 25;
+
+      it.filled_rectangle(10, 20, 230, 2);
+      
+      // Normální černý text
+      it.printf(co2_x, co2_y + 10, id(font_mdi_large), BLACK, "\U000F07E4");  // CO2 ikona
+      if (!isnan(co2_value) && co2_value != 0) {
+        it.printf(co2_x + 40, co2_y, id(font_large), BLACK, TextAlign::TOP_LEFT, "%4d", co2_value);
+      }
+
+      it.printf(co2_x + 140, co2_y + 43, id(font_medium), BLACK, TextAlign::BOTTOM_LEFT, "ppm");
+
+      if (co2_value > 1500) {
+        it.printf(co2_x + 190, co2_y + 5, id(font_mdi_large), BLACK, "\U000F0026");  // CO2 Alert2
+      }
+      else if (co2_value > 1200) {
+        it.printf(co2_x + 190, co2_y + 5, id(font_mdi_large), BLACK, "\U000F002A");  // CO2 Alert1
+      }      
+      else {
+        it.filled_rectangle(co2_x + 190, co2_y + 5, 30, 30, WHITE);  // Smazat CO2 Alert
+      }
+
+
+      // --- Teplota ---
+      int temp_y = 83;
+      //it.filled_rectangle(10, temp_y, 3, 50);
+      it.printf(0, temp_y + 3, id(font_mdi_medium), BLACK, "\U000F050F");  // teploměr
+      if (!isnan(temp)) {
+        it.printf(30, temp_y, id(font_medium2), BLACK, "%.1f °C", temp);
+      }
+
+      //it.filled_rectangle(130, temp_y + 7, 3, 18);
+
+      // --- Vlhkost ---
+      //int hum_y = temp_y + 25;
+      int hum_y = temp_y;
+
+      it.printf(145, hum_y + 3, id(font_mdi_medium), BLACK, "\U000F0E0A");  // kapka
+      if (!isnan(hum)) {
+        it.printf(175, hum_y, id(font_medium2), BLACK, "%.0f %%", hum);
+      }
+
+      // --- Baterie ---
+      int batt_y = 2;
+      int batt_x = 140;
+      if (!isnan(batt)) {
+        float percent = (batt - 3.2) / (4.1 - 3.2) * 100.0;
+        if (percent > 100) percent = 100;
+        if (percent < 0) percent = 0;
+        if (percent >= 75){
+          it.printf(batt_x, batt_y, id(font_mdi_small), BLACK, "\U000F0079"); // batt high
+        }
+        else if (percent >= 50){
+          it.printf(batt_x, batt_y, id(font_mdi_small), BLACK, "\U000F0080"); // batt med
+        }
+        else if (percent >= 25){
+          it.printf(batt_x, batt_y, id(font_mdi_small), BLACK, "\U000F007C"); // batt low
+        }
+        else {
+          it.printf(batt_x, batt_y, id(font_mdi_small), BLACK, "\U000F10CD"); // batt critical
+        }
+
+        it.printf(batt_x + 15, batt_y - 2, id(font_small), BLACK, "%.2fV (%.0f%%)", batt, percent);
+      }
+
+      // --- Wi-Fi ---
+      if (!isnan(wifi)) {
+        if (wifi >= -55){
+          it.printf(10, batt_y, id(font_mdi_small), BLACK, "\U000F0928"); // wifi high
+        }
+        else if (wifi >= -67){
+          it.printf(10, batt_y, id(font_mdi_small), BLACK, "\U000F0925"); // wifi med
+        }
+        else if (wifi >= -75){
+          it.printf(10, batt_y, id(font_mdi_small), BLACK, "\U000F091F"); // wifi low
+        }
+        else {
+          it.printf(10, batt_y, id(font_mdi_small), BLACK, "\U000F092F"); // wifi very low
+        }
+
+        it.printf(25, batt_y - 1, id(font_small), BLACK, "%.0f dBm", wifi);
+      }
+
+
+deep_sleep:
+  id: deep_sleep_10min
+  run_duration: 12s  # Standardní čas běhu (10 s)
+  #run_duration: 120s  # Standardní čas běhu 
+  sleep_duration: 15min
