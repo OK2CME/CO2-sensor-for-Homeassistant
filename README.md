@@ -16,6 +16,8 @@ I have tested with 2x 18650 in paralell (2 x 3200 mAh) with battery life 3-4 mon
  - Lolin D32 board:
  https://www.aliexpress.com/item/1005005476182210.html?spm=a2g0o.productlist.main.1.24e0A9T1A9T1kg&algo_pvid=030559df-eefc-40dd-9f21-9d04451b55d2&algo_exp_id=030559df-eefc-40dd-9f21-9d04451b55d2-0&pdp_ext_f=%7B%22order%22%3A%22126%22%2C%22spu_best_type%22%3A%22order%22%2C%22eval%22%3A%221%22%2C%22fromPage%22%3A%22search%22%7D&pdp_npi=6%40dis%21USD%214.34%214.34%21%21%214.34%214.34%21%402103856417700678999443360eaaaa%2112000041163128652%21sea%21CZ%21895548865%21X%211%210%21n_tag%3A-29919%3Bd%3A2d5fa0bd%3Bm03_new_user%3A-29895&curPageLogUid=Nk3MqKlkM9HT&utparam-url=scene%3Asearch%7Cquery_from%3A%7Cx_object_id%3A1005005476182210%7C_p_origin_prod%3A
 
+
+  - 2,13in WeActStudio epaper display: https://www.aliexpress.com/item/1005004644515880.html?spm=a2g0o.productlist.main.4.4864sYBbsYBb3C&algo_pvid=edba6ddd-6b41-4b92-844d-86b67024a802&algo_exp_id=edba6ddd-6b41-4b92-844d-86b67024a802-3&pdp_ext_f=%7B%22order%22%3A%222004%22%2C%22eval%22%3A%221%22%2C%22fromPage%22%3A%22search%22%7D&pdp_npi=6%40dis%21USD%219.87%219.15%21%21%2168.18%2163.19%21%4021038e6617700718789514887e86dc%2112000034319637606%21sea%21CZ%21895548865%21X%211%210%21n_tag%3A-29919%3Bd%3A2d5fa0bd%3Bm03_new_user%3A-29895&curPageLogUid=tdM6oFL3mkeG&utparam-url=scene%3Asearch%7Cquery_from%3A%7Cx_object_id%3A1005004644515880%7C_p_origin_prod%3A
   - 2x 1M resistor for battery voltage measurement (voltage divider between BATT - D35 - GND)
   - LiIon battery holder - I used 2x 18650 liion 
 
