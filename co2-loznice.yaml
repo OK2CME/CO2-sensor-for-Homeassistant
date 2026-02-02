@@ -1,6 +1,6 @@
 esphome:
-  name: co2-loznice
-  friendly_name: CO2-loznice
+  name: co2-sensor1
+  friendly_name: CO2-sensor1
   platformio_options:
     board_build.f_cpu: 80000000L
 
@@ -119,7 +119,7 @@ wifi:
             - homeassistant.service:
                 service: input_boolean.turn_off
                 data:
-                  entity_id: input_boolean.co2_loznice_manualni_kalibrace
+                  entity_id: input_boolean.co2_sensor1_manual_cal
 
 globals:
   - id: wakecounter
@@ -180,7 +180,7 @@ globals:
 binary_sensor:
   - platform: homeassistant
     id: ha_ota_mode
-    entity_id: input_boolean.co2_loznice_ota_mode
+    entity_id: input_boolean.co2_sensor1_ota_mode
     on_state:
       then:
         - lambda: |-
@@ -188,7 +188,7 @@ binary_sensor:
 
   - platform: homeassistant
     id: ha_calibrate_request
-    entity_id: input_boolean.co2_loznice_manualni_kalibrace
+    entity_id: input_boolean.co2_sensor1_manual_cal
 
 i2c:
   sda: 0
@@ -324,7 +324,7 @@ script:
       - homeassistant.service:
           service: input_boolean.turn_off
           data:
-            entity_id: input_boolean.co2_loznice_ota_mode
+            entity_id: input_boolean.co2_sensor1_ota_mode
       - lambda: |-
           id(allow_sleep) = true;
 
