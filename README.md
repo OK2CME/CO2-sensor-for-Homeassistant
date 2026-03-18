@@ -85,24 +85,23 @@ ESPHome device must be trusted to call HA services. If it is not, it will not be
 *** Wiring diagram ***
 Connection diagram is very easy and is visible from the photos at makerworld and does not need special schematic. Below are text instructions how to connect all parts together.
 
-LoLin D32 pin - where to connect:
----------------------------------
-23  -  yellow wire of ePaper (MOSI)
-18  -  green wire of ePaper (CLK)
-5   -  blue wire of ePaper (CS)
-17  -  white wire of ePaper (DC)
-16  -  orange wire of ePaper (RESET)
+* LoLin D32 pin - where to connect:
+  - 23  -  yellow wire of ePaper (MOSI)
+  - 18  -  green wire of ePaper (CLK)
+  - 5   -  blue wire of ePaper (CS)
+  - 17  -  white wire of ePaper (DC)
+  - 16  -  orange wire of ePaper (RESET)
 
-4   -  SCL line of the SCD41
-0   -  SDA line of the SCD41
-	
-34  -  purple wire of ePaper (BUSY)
-35  -  output of voltage divider for battery measurement - resistor 1M to +VBat, resistor 1M to GND
+  - 4   -  SCL line of the SCD41
+  - 0   -  SDA line of the SCD41
 
-Positive (VCC) input of the ePaper and SCD41 is connected to 3V pin on LoLin D32.
-Negative (GND) input of the ePaper and SCD41 is connected to GND.
+  - 34  -  purple wire of ePaper (BUSY)
+  - 35  -  output of voltage divider for battery measurement - resistor 1M to +VBat, resistor 1M to GND
 
-Batteries (18650 cells) are connected in parelell (1S2P) and connected to the battery input of the LoLin board.
+  - Positive (VCC) input of the ePaper and SCD41 is connected to 3V pin on LoLin D32.
+  - Negative (GND) input of the ePaper and SCD41 is connected to GND.
+
+  - Batteries (18650 cells) are connected in parelell (1S2P) and connected to the battery input of the LoLin board.
 
 I recommend to solder out the original connector for the battery from the LoLin board. There will are nice pads for connecting wires from batteries and for connecting voltage divider. It is not necessary, but it makes connections of battery and voltage divider much easier.  
  
