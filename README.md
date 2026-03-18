@@ -82,7 +82,7 @@ ESPHome device must be trusted to call HA services. If it is not, it will not be
   - Indoor air quality monitoring
   - Bedrooms, living rooms, offices
 
-*** Wiring diagram ***
+### Wiring diagram ###
 Connection diagram is very easy and is visible from the photos at makerworld and does not need special schematic. Below are text instructions how to connect all parts together.
 
 * LoLin D32 pin - where to connect:
